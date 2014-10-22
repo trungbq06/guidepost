@@ -76,66 +76,68 @@
     // Title
     NSArray * titleNodes  = [doc searchWithXPathQuery:@"//meta[@property='og:title']"];
     
-    TFHppleElement *titleElement = [titleNodes objectAtIndex:0];
-    
-    NSDictionary *titleDict = [titleElement attributes];
-    
-    if (!titleDict) {
-        _activity.hidden = YES;
-        // Get site title, description
-        NSArray * titleNodes  = [doc searchWithXPathQuery:@"//title"];
-        
+    if ([titleNodes count] > 0) {
         TFHppleElement *titleElement = [titleNodes objectAtIndex:0];
         
-        NSString *myTitle =  [[titleElement firstChild] content];
+        NSDictionary *titleDict = [titleElement attributes];
         
-        _myTitle.text = myTitle;
-        _myTitle.hidden = NO;
-        
-        NSArray * descNodes  = [doc searchWithXPathQuery:@"//description"];
-        
-        TFHppleElement *descElement = [descNodes objectAtIndex:0];
-        
-        NSString *myDesc =  [[descElement firstChild] content];
-        
-        _myDesc.text = myDesc;
-        _myDesc.hidden = NO;
-        _myImage.hidden = NO;
-    } else {
-        _activity.hidden = YES;
-        NSString *myTitle = [titleDict objectForKey:@"content"];
-        
-        NSLog(@"Title: %@", myTitle);
-        _myTitle.text = myTitle;
-        _myTitle.hidden = NO;
-        
-        // Image
-        NSArray * imageNodes  = [doc searchWithXPathQuery:@"//meta[@property='og:image']"];
-        
-        TFHppleElement *imageElement = [imageNodes objectAtIndex:0];
-        
-        NSDictionary *imageDict = [imageElement attributes];
-        
-        NSString *myImage = [imageDict objectForKey:@"content"];
-        
-        NSLog(@"Image: %@", myImage);
-        _myImage.hidden = NO;
-        [_myImage sd_setImageWithURL:[NSURL URLWithString:myImage]];
-        
-        // Description
-        NSArray * descNodes  = [doc searchWithXPathQuery:@"//meta[@property='og:description']"];
-        
-        TFHppleElement *descElement = [descNodes objectAtIndex:0];
-        
-        NSDictionary *descDict = [descElement attributes];
-        
-        NSString *myDesc = [descDict objectForKey:@"content"];
-        
-        NSLog(@"Desc: %@", myDesc);
-        _myDesc.text = myDesc;
-        _myDesc.hidden = NO;
-        
-        [_btnDownload setFrame:CGRectMake(_btnDownload.frame.origin.x, _btnDownload.frame.origin.y + 400, _btnDownload.frame.size.width, _btnDownload.frame.size.height)];
+        if (!titleDict) {
+            _activity.hidden = YES;
+            // Get site title, description
+            NSArray * titleNodes  = [doc searchWithXPathQuery:@"//title"];
+            
+            TFHppleElement *titleElement = [titleNodes objectAtIndex:0];
+            
+            NSString *myTitle =  [[titleElement firstChild] content];
+            
+            _myTitle.text = myTitle;
+            _myTitle.hidden = NO;
+            
+            NSArray * descNodes  = [doc searchWithXPathQuery:@"//description"];
+            
+            TFHppleElement *descElement = [descNodes objectAtIndex:0];
+            
+            NSString *myDesc =  [[descElement firstChild] content];
+            
+            _myDesc.text = myDesc;
+            _myDesc.hidden = NO;
+            _myImage.hidden = NO;
+        } else {
+            _activity.hidden = YES;
+            NSString *myTitle = [titleDict objectForKey:@"content"];
+            
+            NSLog(@"Title: %@", myTitle);
+            _myTitle.text = myTitle;
+            _myTitle.hidden = NO;
+            
+            // Image
+            NSArray * imageNodes  = [doc searchWithXPathQuery:@"//meta[@property='og:image']"];
+            
+            TFHppleElement *imageElement = [imageNodes objectAtIndex:0];
+            
+            NSDictionary *imageDict = [imageElement attributes];
+            
+            NSString *myImage = [imageDict objectForKey:@"content"];
+            
+            NSLog(@"Image: %@", myImage);
+            _myImage.hidden = NO;
+            [_myImage sd_setImageWithURL:[NSURL URLWithString:myImage]];
+            
+            // Description
+            NSArray * descNodes  = [doc searchWithXPathQuery:@"//meta[@property='og:description']"];
+            
+            TFHppleElement *descElement = [descNodes objectAtIndex:0];
+            
+            NSDictionary *descDict = [descElement attributes];
+            
+            NSString *myDesc = [descDict objectForKey:@"content"];
+            
+            NSLog(@"Desc: %@", myDesc);
+            _myDesc.text = myDesc;
+            _myDesc.hidden = NO;
+            
+            [_btnDownload setFrame:CGRectMake(_btnDownload.frame.origin.x, _btnDownload.frame.origin.y + 400, _btnDownload.frame.size.width, _btnDownload.frame.size.height)];
+        }
     }
 }
 
