@@ -138,6 +138,9 @@
             
             [_btnDownload setFrame:CGRectMake(_btnDownload.frame.origin.x, _btnDownload.frame.origin.y + 400, _btnDownload.frame.size.width, _btnDownload.frame.size.height)];
         }
+    } else {
+        _activity.hidden = YES;
+        _btnDownload.hidden = NO;
     }
 }
 
