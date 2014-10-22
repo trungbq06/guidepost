@@ -146,11 +146,17 @@
 {
     [_btnDownload setFrame:CGRectMake(124, 143, _btnDownload.frame.size.width, _btnDownload.frame.size.height)];
     _btnDownload.hidden = NO;
+    _btnDownload.userInteractionEnabled = NO;
     _activity.hidden = YES;
     
     _myImage.hidden = YES;
     _myDesc.hidden = YES;
     _myTitle.hidden = YES;
+    
+    NSURL *url = [NSURL URLWithString:_myLink.text];
+    
+    if ([self isValidURL:url])
+        _btnDownload.userInteractionEnabled = YES;
 }
 
 @end
